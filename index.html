@@ -214,6 +214,80 @@
       font-size: 16px;
     }
 
+    /* CARRUSEL */
+    .carousel-wrapper {
+      position: relative;
+      max-width: 900px;
+      margin: 30px auto 0;
+    }
+
+    .carousel-window {
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.80);
+      color: #4a3b31;
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 5;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255,255,255,0.98);
+    }
+
+    .prev {
+      left: 14px;
+    }
+
+    .next {
+      right: 14px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d8c9ba;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: #a68463;
+      transform: scale(1.2);
+    }
+
     @media (max-width: 768px) {
       .hero-box {
         padding: 42px 22px;
@@ -238,6 +312,16 @@
       .countdown {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .carousel-slide {
+        height: 320px;
+      }
+
+      .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
     }
   </style>
 </head>
@@ -254,6 +338,36 @@
       <div class="buttons">
         <a href="#detalle" class="btn btn-primary">Ver invitación</a>
         <a href="#rsvp" class="btn btn-secondary">Confirmar asistencia</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRUSEL DE FOTOS -->
+  <section class="section">
+    <div class="card">
+      <h2>Nuestros momentos</h2>
+      <p class="subtle">Un pequeño recorrido de nuestra historia.</p>
+
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" onclick="moverSlide(-1)">&#10094;</button>
+
+        <div class="carousel-window">
+          <div class="carousel-track" id="carouselTrack">
+            <img src="foto1.jpg" alt="Foto 1 de Alfred y Joha" class="carousel-slide">
+            <img src="foto2.jpg" alt="Foto 2 de Alfred y Joha" class="carousel-slide">
+            <img src="foto3.jpg" alt="Foto 3 de Alfred y Joha" class="carousel-slide">
+            <img src="foto4.jpg" alt="Foto 4 de Alfred y Joha" class="carousel-slide">
+          </div>
+        </div>
+
+        <button class="carousel-btn next" onclick="moverSlide(1)">&#10095;</button>
+      </div>
+
+      <div class="carousel-dots">
+        <span class="dot active" onclick="irASlide(0)"></span>
+        <span class="dot" onclick="irASlide(1)"></span>
+        <span class="dot" onclick="irASlide(2)"></span>
+        <span class="dot" onclick="irASlide(3)"></span>
       </div>
     </div>
   </section>
@@ -338,6 +452,43 @@
 
     setInterval(actualizarContador, 1000);
     actualizarContador();
+
+    let slideActual = 0;
+    const totalSlides = 4;
+
+    function actualizarCarrusel() {
+      const track = document.getElementById("carouselTrack");
+      const dots = document.querySelectorAll(".dot");
+
+      track.style.transform = `translateX(-${slideActual * 100}%)`;
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === slideActual);
+      });
+    }
+
+    function moverSlide(direccion) {
+      slideActual += direccion;
+
+      if (slideActual < 0) {
+        slideActual = totalSlides - 1;
+      }
+
+      if (slideActual >= totalSlides) {
+        slideActual = 0;
+      }
+
+      actualizarCarrusel();
+    }
+
+    function irASlide(index) {
+      slideActual = index;
+      actualizarCarrusel();
+    }
+
+    setInterval(() => {
+      moverSlide(1);
+    }, 5000);
   </script>
 
 </body>
