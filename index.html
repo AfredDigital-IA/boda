@@ -23,6 +23,133 @@
       line-height: 1.6;
     }
 
+    /* INTRO 15 AÑOS */
+    #intro-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(40,30,24,0.92), rgba(20,16,14,0.98));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
+    }
+
+    #intro-overlay.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-content {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    #count-number {
+      font-size: 120px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: 2px;
+      opacity: 1;
+      transform: scale(1);
+      transition: transform 0.35s ease, opacity 0.35s ease;
+      text-shadow: 0 0 25px rgba(255,255,255,0.12);
+    }
+
+    #count-number.animate {
+      transform: scale(1.15);
+    }
+
+    #intro-message {
+      margin-top: 28px;
+      font-size: 24px;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.5px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #intro-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #celebration-burst {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    #celebration-burst.show {
+      opacity: 1;
+    }
+
+    .spark {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #f3d7b6;
+      box-shadow: 0 0 12px rgba(243, 215, 182, 0.85);
+      opacity: 0;
+    }
+
+    #celebration-burst.show .spark1 { animation: burst1 1s ease-out forwards; }
+    #celebration-burst.show .spark2 { animation: burst2 1s ease-out forwards; }
+    #celebration-burst.show .spark3 { animation: burst3 1s ease-out forwards; }
+    #celebration-burst.show .spark4 { animation: burst4 1s ease-out forwards; }
+    #celebration-burst.show .spark5 { animation: burst5 1s ease-out forwards; }
+    #celebration-burst.show .spark6 { animation: burst6 1s ease-out forwards; }
+    #celebration-burst.show .spark7 { animation: burst7 1s ease-out forwards; }
+    #celebration-burst.show .spark8 { animation: burst8 1s ease-out forwards; }
+
+    @keyframes burst1 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(0,-120px) scale(0.6); }
+    }
+    @keyframes burst2 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(85px,-85px) scale(0.6); }
+    }
+    @keyframes burst3 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(120px,0) scale(0.6); }
+    }
+    @keyframes burst4 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(85px,85px) scale(0.6); }
+    }
+    @keyframes burst5 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(0,120px) scale(0.6); }
+    }
+    @keyframes burst6 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(-85px,85px) scale(0.6); }
+    }
+    @keyframes burst7 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(-120px,0) scale(0.6); }
+    }
+    @keyframes burst8 {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(-85px,-85px) scale(0.6); }
+    }
+
     .hero {
       position: relative;
       min-height: 100vh;
@@ -289,6 +416,15 @@
     }
 
     @media (max-width: 768px) {
+      #count-number {
+        font-size: 82px;
+      }
+
+      #intro-message {
+        font-size: 18px;
+        padding: 0 20px;
+      }
+
       .hero-box {
         padding: 42px 22px;
       }
@@ -327,6 +463,26 @@
 </head>
 <body>
 
+  <!-- INTRO -->
+  <div id="intro-overlay">
+    <div class="intro-content">
+      <div id="count-number">1</div>
+
+      <div id="celebration-burst">
+        <span class="spark spark1"></span>
+        <span class="spark spark2"></span>
+        <span class="spark spark3"></span>
+        <span class="spark spark4"></span>
+        <span class="spark spark5"></span>
+        <span class="spark spark6"></span>
+        <span class="spark spark7"></span>
+        <span class="spark spark8"></span>
+      </div>
+
+      <p id="intro-message">15 años de historia nos trajeron hasta aquí</p>
+    </div>
+  </div>
+
   <section class="hero">
     <div class="hero-box">
       <div class="overline">Nos casamos</div>
@@ -342,7 +498,6 @@
     </div>
   </section>
 
-  <!-- CARRUSEL DE FOTOS -->
   <section class="section">
     <div class="card">
       <h2>Nuestros momentos</h2>
@@ -414,7 +569,7 @@
     <div class="card" id="rsvp">
       <h2>Confirmación de asistencia</h2>
       <p class="subtle">Nos encantará compartir este momento contigo.</p>
-      <a class="rsvp-btn" href="https://wa.me/573184072000" target="_blank">
+      <a class="rsvp-btn" href="https://wa.me/573001234567" target="_blank">
         Confirmar por WhatsApp
       </a>
     </div>
@@ -489,6 +644,47 @@
     setInterval(() => {
       moverSlide(1);
     }, 5000);
+
+    function iniciarIntro15() {
+      const overlay = document.getElementById("intro-overlay");
+      const countNumber = document.getElementById("count-number");
+      const burst = document.getElementById("celebration-burst");
+      const message = document.getElementById("intro-message");
+
+      let numero = 1;
+
+      countNumber.textContent = "1";
+      countNumber.classList.add("animate");
+
+      const intervalo = setInterval(() => {
+        countNumber.classList.remove("animate");
+        void countNumber.offsetWidth;
+        countNumber.textContent = numero;
+        countNumber.classList.add("animate");
+
+        if (numero === 15) {
+          clearInterval(intervalo);
+
+          setTimeout(() => {
+            burst.classList.add("show");
+          }, 250);
+
+          setTimeout(() => {
+            message.classList.add("show");
+          }, 650);
+
+          setTimeout(() => {
+            overlay.classList.add("hide");
+          }, 2800);
+        }
+
+        numero++;
+      }, 260);
+    }
+
+    window.addEventListener("load", () => {
+      iniciarIntro15();
+    });
   </script>
 
 </body>
