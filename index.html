@@ -692,23 +692,33 @@
       font-size:16px;
     }
 
-#musicButton{
+.audio-btn{
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #b69472;
+  bottom: 22px;
+  right: 22px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(182,148,114,0.75);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
   color: white;
-  padding: 12px 18px;
-  border-radius: 30px;
-  font-size: 14px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
   z-index: 999;
-  transition: 0.3s ease;
+  transition: all .3s ease;
 }
 
-#musicButton:hover{
-  background: #a68463;
+.audio-btn:hover{
+  transform: scale(1.08);
+  background: rgba(182,148,114,0.95);
+}
+
+.audio-btn.playing{
+  background: rgba(140,110,80,0.85);
 }
     
     /* RESPONSIVE */
@@ -1148,8 +1158,22 @@
         }, 420);
 
         setTimeout(() => {
-          overlay.classList.add("hide");
-        }, 1400);
+  overlay.classList.add("hide");
+
+  const weddingSong = document.getElementById("weddingSong");
+  const musicButton = document.getElementById("musicButton");
+
+  if (weddingSong) {
+    weddingSong.play().then(() => {
+      if (musicButton) {
+        musicButton.classList.add("playing");
+      }
+    }).catch(() => {
+      console.log("El navegador bloqueó la reproducción automática.");
+    });
+  }
+
+}, 1400);
       }
 
       numero++;
@@ -1157,31 +1181,33 @@
   }
 
   /* MÚSICA LOCAL MP3 */
-  function inicializarMusica() {
-    const musicButton = document.getElementById("musicButton");
-    const weddingSong = document.getElementById("weddingSong");
+ function inicializarMusica() {
+  const musicButton = document.getElementById("musicButton");
+  const weddingSong = document.getElementById("weddingSong");
+  const audioIcon = document.getElementById("audioIcon");
 
-    if (!musicButton || !weddingSong) return;
+  if (!musicButton || !weddingSong) return;
 
-    let isPlaying = false;
+  let isPlaying = false;
 
-    musicButton.addEventListener("click", async () => {
-      try {
-        if (!isPlaying) {
-          await weddingSong.play();
-          isPlaying = true;
-          musicButton.innerHTML = "⏸ Pausar música";
-        } else {
-          weddingSong.pause();
-          isPlaying = false;
-          musicButton.innerHTML = "▶ Nuestra canción";
-        }
-      } catch (error) {
-        console.error("No se pudo reproducir la canción:", error);
-        musicButton.innerHTML = "Error al reproducir";
+  musicButton.addEventListener("click", async () => {
+    try {
+      if (!isPlaying) {
+        await weddingSong.play();
+        isPlaying = true;
+        musicButton.classList.add("playing");
+        audioIcon.innerHTML = "🔊";
+      } else {
+        weddingSong.pause();
+        isPlaying = false;
+        musicButton.classList.remove("playing");
+        audioIcon.innerHTML = "🔇";
       }
-    });
-  }
+    } catch (error) {
+      console.error("No se pudo reproducir la canción:", error);
+    }
+  });
+}
 
   /* ANIMACIÓN SUAVE AL HACER SCROLL */
   function inicializarAnimacionesScroll() {
@@ -1210,7 +1236,9 @@
   Tu navegador no soporta audio HTML.
 </audio>
 
-  <div id="musicButton">▶ Nuestra canción</div>
+  <div id="musicButton" class="audio-btn">
+  <span id="audioIcon">🔇</span>
+</div>
   
 </body>
 </html>
