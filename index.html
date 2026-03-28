@@ -590,55 +590,64 @@
       color:#8a7564;
       font-size:15px;
     }
+/* DRESS CODE */
+.dress-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+    margin-top:30px;
+    text-align:left;
+}
 
-    /* DRESS CODE */
-    .dress-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:24px;
-      margin-top:30px;
-      text-align:left;
-    }
+.dress-card{
+    background:#fffaf5;
+    border-radius:26px;
+    overflow:hidden;
+    border:1px solid #e7dbcf;
+    box-shadow:0 12px 30px rgba(83,63,47,0.10);
+    transition:transform .25s ease, box-shadow .25s ease;
+}
 
-    .dress-card{
-      background:#fffaf5;
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      box-shadow:0 8px 24px rgba(83,63,47,0.08);
-    }
+.dress-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(83,63,47,0.15);
+}
 
-    .dress-card img{
-      width:100%;
-      height:420px;
-      object-fit:cover;
-      object-position:center;
-    }
+.dress-card img{
+    width:100%;
+    height:520px;
+    object-fit:contain;
+    object-position:center;
+    background:#f6efe7;
+    padding:12px;
+}
 
-    .dress-body{
-      padding:22px 22px 26px;
-    }
+.dress-body{
+    padding:24px 24px 28px;
+}
 
-    .dress-body h3{
-      font-size:26px;
-      color:#4a3b31;
-      margin-bottom:8px;
-    }
+.dress-body h3{
+    font-size:28px;
+    color:#4a3b31;
+    margin-bottom:10px;
+}
 
-    .dress-body p{
-      color:#6f5e52;
-      font-size:17px;
-    }
+.dress-body p{
+    color:#6f5e52;
+    font-size:18px;
+    line-height:1.6;
+}
 
-    .dress-tip{
-      margin-top:16px;
-      padding:14px 16px;
-      background:#f8f2ec;
-      border-radius:16px;
-      color:#7c6a5d;
-      font-size:15px;
-      border:1px solid var(--line);
-    }
+.dress-tip{
+    margin-top:16px;
+    padding:14px 16px;
+    background:#f8f2ec;
+    border-radius:16px;
+    color:#7c6a5d;
+    font-size:15px;
+    border:1px solid #e7dbcf;
+}
+    
 
     /* MOMENTS */
     .gallery-grid{
