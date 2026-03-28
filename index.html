@@ -693,22 +693,22 @@
     }
 
 #musicButton{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#b69472;
-  color:white;
-  padding:12px 18px;
-  border-radius:30px;
-  font-size:14px;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,0.2);
-  z-index:999;
-  transition:0.3s;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #b69472;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  z-index: 999;
+  transition: 0.3s ease;
 }
 
 #musicButton:hover{
-  background:#a68463;
+  background: #a68463;
 }
     
     /* RESPONSIVE */
@@ -1171,61 +1171,40 @@
     document.querySelectorAll(".fade-up").forEach(section => {
       observer.observe(section);
     });
-  </script>
 
-  
-<!-- BOTÓN DE MÚSICA -->
+<audio id="weddingSong" preload="auto">
+  <source src="frente-al-mar.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio HTML.
+</audio>
+
 <div id="musicButton">▶ Nuestra canción</div>
 
-<!-- CONTENEDOR DEL REPRODUCTOR -->
-<div id="spotifyEmbedContainer" style="position:fixed; left:-9999px; width:300px; height:80px;"></div>
-
-<!-- API DE SPOTIFY -->
-<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
-
-
-  <script>
-  let spotifyController = null;
-  let spotifyReady = false;
-  let spotifyPlaying = false;
-
-  window.onSpotifyIframeApiReady = (IFrameAPI) => {
-    const element = document.getElementById('spotifyEmbedContainer');
-
-    const options = {
-      uri: 'spotify:track:60u6hcpH5Qm1M3xESdNBrB',
-      width: 300,
-      height: 80
-    };
-
-    const callback = (EmbedController) => {
-      spotifyController = EmbedController;
-      spotifyReady = true;
-    };
-
-    IFrameAPI.createController(element, options, callback);
-  };
-
+    <script>
   document.addEventListener("DOMContentLoaded", () => {
     const musicButton = document.getElementById("musicButton");
+    const weddingSong = document.getElementById("weddingSong");
 
-    musicButton.addEventListener("click", () => {
-      if (!spotifyReady || !spotifyController) {
-        musicButton.innerHTML = "Cargando canción...";
-        return;
-      }
+    let isPlaying = false;
 
-      if (!spotifyPlaying) {
-        spotifyController.play();
-        spotifyPlaying = true;
-        musicButton.innerHTML = "⏸ Pausar música";
-      } else {
-        spotifyController.pause();
-        spotifyPlaying = false;
-        musicButton.innerHTML = "▶ Nuestra canción";
+    musicButton.addEventListener("click", async () => {
+      try {
+        if (!isPlaying) {
+          await weddingSong.play();
+          isPlaying = true;
+          musicButton.innerHTML = "⏸ Pausar música";
+        } else {
+          weddingSong.pause();
+          isPlaying = false;
+          musicButton.innerHTML = "▶ Nuestra canción";
+        }
+      } catch (error) {
+        console.error("No se pudo reproducir la canción:", error);
+        musicButton.innerHTML = "Error al reproducir";
       }
     });
   });
+</script>
+  
 </script>
 </body>
 </html>
