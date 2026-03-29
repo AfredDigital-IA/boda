@@ -352,6 +352,71 @@
       color:#8a7564;
     }
 
+.hero-countdown-wrap{
+  margin-top: 28px;
+  text-align: center;
+}
+
+.hero-countdown-title{
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 14px;
+}
+
+.hero-countdown{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-count-item{
+  min-width: 88px;
+  padding: 14px 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.20);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.hero-count-item span{
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1;
+  color: white;
+  margin-bottom: 6px;
+}
+
+.hero-count-item small{
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.82);
+}
+
+@media (max-width: 768px){
+  .hero-countdown{
+    gap: 8px;
+  }
+
+  .hero-count-item{
+    min-width: 72px;
+    padding: 12px 8px;
+  }
+
+  .hero-count-item span{
+    font-size: 22px;
+  }
+
+  .hero-count-item small{
+    font-size: 10px;
+  }
+}
+    
     /* CELEBRATION */
     .celebration-text{
       max-width:760px;
@@ -921,14 +986,35 @@
       <div class="overline">Nos casamos</div>
       <h1>Alfred & Joha</h1>
       <div class="divider"></div>
-      <p class="phrase">El mar será testigo de nuestro sí</p>
+      <p class="phrase">El mar será testigo del amor</p>
       <p class="date-place">14 de noviembre de 2026 · Santa Marta, Colombia</p>
 
       <div class="buttons">
-        <a href="#contador" class="btn btn-primary">Ver invitación</a>
+        <a href="#celebracion" class="btn btn-primary">Ver invitación</a>
         <a href="#rsvp" class="btn btn-secondary">Confirmar asistencia</a>
-        <a href="#como-llegar" class="btn btn-secondary">Cómo llegar</a>
       </div>
+      <div class="hero-countdown-wrap">
+  <p class="hero-countdown-title">Cuenta regresiva</p>
+
+  <div class="hero-countdown">
+    <div class="hero-count-item">
+      <span id="heroDias">00</span>
+      <small>Días</small>
+    </div>
+    <div class="hero-count-item">
+      <span id="heroHoras">00</span>
+      <small>Horas</small>
+    </div>
+    <div class="hero-count-item">
+      <span id="heroMinutos">00</span>
+      <small>Min</small>
+    </div>
+    <div class="hero-count-item">
+      <span id="heroSegundos">00</span>
+      <small>Seg</small>
+    </div>
+  </div>
+</div>
     </div>
   </section>
 
@@ -1263,31 +1349,55 @@
   </div>
 
 <script>
+
+  
   /* CONTADOR BODA */
   const fechaBoda = new Date("2026-11-14T16:00:00").getTime();
 
   function actualizarContador() {
-    const ahora = new Date().getTime();
-    const diferencia = fechaBoda - ahora;
+  const ahora = new Date().getTime();
+  const diferencia = fechaBoda - ahora;
 
-    if (diferencia <= 0) {
-      document.getElementById("dias").innerText = "00";
-      document.getElementById("horas").innerText = "00";
-      document.getElementById("minutos").innerText = "00";
-      document.getElementById("segundos").innerText = "00";
-      return;
-    }
+  const ids = [
+    ["dias", "heroDias"],
+    ["horas", "heroHoras"],
+    ["minutos", "heroMinutos"],
+    ["segundos", "heroSegundos"]
+  ];
 
-    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
-
-    document.getElementById("dias").innerText = dias;
-    document.getElementById("horas").innerText = horas;
-    document.getElementById("minutos").innerText = minutos;
-    document.getElementById("segundos").innerText = segundos;
+  if (diferencia <= 0) {
+    ids.forEach(([id1, id2]) => {
+      const el1 = document.getElementById(id1);
+      const el2 = document.getElementById(id2);
+      if (el1) el1.innerText = "00";
+      if (el2) el2.innerText = "00";
+    });
+    return;
   }
+
+  const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+  const valores = {
+    dias,
+    horas,
+    minutos,
+    segundos
+  };
+
+  ids.forEach(([id1, id2], index) => {
+    const key = Object.keys(valores)[index];
+    const valor = valores[key];
+
+    const el1 = document.getElementById(id1);
+    const el2 = document.getElementById(id2);
+
+    if (el1) el1.innerText = valor;
+    if (el2) el2.innerText = valor;
+  });
+}
 
   setInterval(actualizarContador, 1000);
   actualizarContador();
