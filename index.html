@@ -1554,6 +1554,49 @@ function manejarSwipeMomentos() {
   iniciarAutoMomentos();
   actualizarMomentos();
 });
+
+
+  /* FORMULARIO CONFIRMACIÓN */
+
+  const scriptURL = "https://api.sheetbest.com/sheets/b4cf6ad2-4545-40d0-a1e7-bf5b1282b342";
+
+  document.getElementById("rsvpForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const message = document.getElementById("rsvpMessage");
+
+    const formData = {
+  fechaRegistro: new Date().toLocaleString(),
+  nombre: form.nombre.value,
+  asistencia: form.asistencia.value,
+  numeroInvitados: form.numeroInvitados.value,
+  restricciones: form.restricciones.value,
+  hospedaje: form.hospedaje.value,
+  transporte: form.transporte.value,
+  observaciones: form.observaciones.value
+};
+
+    try {
+      message.innerText = "Enviando confirmación...";
+
+      await fetch(scriptURL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      message.innerText = "¡Gracias! Tu confirmación fue registrada.";
+      form.reset();
+
+    } catch (error) {
+      console.error(error);
+      message.innerText = "Ocurrió un error al enviar la información.";
+    }
+  });
+  
   
 </script>
   <audio id="weddingSong" preload="auto" loop>
