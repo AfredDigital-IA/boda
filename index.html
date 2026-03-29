@@ -39,7 +39,17 @@
     .hero-box{ width:100%; max-width:900px; padding:60px 30px; border-radius:28px; background:rgba(255, 248, 241, 0.14); border:1px solid rgba(255,255,255,0.24); backdrop-filter:blur(4px); color:#fff; }
     
     .hero h1{ font-size:76px; font-weight:500; margin-bottom:10px; }
-    .hero .phrase{ font-size:24px; font-weight:bold; font-style:italic; margin: 5px 0 20px; color: #fff; white-space: nowrap; text-shadow: 1px 1px 8px rgba(0,0,0,0.4); } 
+    .hero .phrase {
+  font-size: 18px;            /* 1. Aquí bajas el tamaño de la fuente */
+  font-weight: bold;          /* 2. Mantiene la negrilla */
+  font-style: italic;         /* 3. Mantiene la cursiva */
+  margin: -5px 0 15px 0;      /* 4. El -5px lo sube para que pegue a los nombres */
+  color: #fff;
+  text-align: center;         /* 5. Asegura que esté centrado */
+  white-space: nowrap;        /* 6. Obliga a que se mantenga en una sola línea */
+  display: block;             /* 7. Ayuda a que el centrado y margen funcionen bien */
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.4);
+} 
 
     .hero-countdown{ display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
     .hero-count-item{ width: 70px; padding: 10px; border-radius: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); }
