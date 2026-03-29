@@ -352,71 +352,73 @@
       color:#8a7564;
     }
 
-.hero-countdown-wrap{
-  margin-top: 28px;
-  text-align: center;
+
+  .hero-countdown-wrap{
+  border-top: 1px solid rgba(255,255,255,0.25);
+  padding-top: 16px;
+  margin-top: 26px;
 }
 
+
 .hero-countdown-title{
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.85);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .hero-countdown{
   display: flex;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap; /* MUY IMPORTANTE */
 }
 
 .hero-count-item{
-  min-width: 88px;
-  padding: 14px 12px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.20);
+  width: 70px;
+  padding: 10px 6px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
 .hero-count-item span{
   display: block;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: bold;
   line-height: 1;
   color: white;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .hero-count-item small{
-  font-size: 11px;
-  letter-spacing: 1.2px;
+  font-size: 9px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.82);
+  color: rgba(255,255,255,0.75);
 }
 
-@media (max-width: 768px){
-  .hero-countdown{
-    gap: 8px;
-  }
-
+    @media (max-width: 480px){
   .hero-count-item{
-    min-width: 72px;
-    padding: 12px 8px;
+    width: 60px;
+    padding: 8px 4px;
   }
 
   .hero-count-item span{
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .hero-count-item small{
-    font-size: 10px;
+    font-size: 8px;
+  }
+
+  .hero-countdown{
+    gap: 6px;
   }
 }
-    
     /* CELEBRATION */
     .celebration-text{
       max-width:760px;
@@ -1032,35 +1034,7 @@
     </div>
   </div>``
 
-  <!-- CONTADOR -->
-  <section class="section fade-up" id="contador">
-    <div class="card">
-      <span class="eyebrow">Faltan</span>
-      <h2>Cuenta regresiva</h2>
-      <p class="subtle section-intro">
-        Cada día nos acerca más a este momento tan especial. Estamos contando los días para celebrar contigo.
-      </p>
 
-      <div class="countdown">
-        <div class="count-item">
-          <span id="dias">00</span>
-          <small>Días</small>
-        </div>
-        <div class="count-item">
-          <span id="horas">00</span>
-          <small>Horas</small>
-        </div>
-        <div class="count-item">
-          <span id="minutos">00</span>
-          <small>Minutos</small>
-        </div>
-        <div class="count-item">
-          <span id="segundos">00</span>
-          <small>Segundos</small>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- NUESTRA CELEBRACIÓN -->
   <section class="section fade-up" id="celebracion">
