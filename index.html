@@ -39,8 +39,7 @@
     .hero-box{ width:100%; max-width:900px; padding:60px 30px; border-radius:28px; background:rgba(255, 248, 241, 0.14); border:1px solid rgba(255,255,255,0.24); backdrop-filter:blur(4px); color:#fff; }
     
     .hero h1{ font-size:76px; font-weight:500; margin-bottom:10px; }
-    .hero .phrase{ font-size:32px; font-weight:bold; font-style:italic; margin: 15px 0; color: #fff; text-shadow: 1px 1px 10px rgba(0,0,0,0.3); } /* Ajuste frase */
-    .hero .date-place{ font-size:22px; letter-spacing:.5px; margin-bottom:30px; }
+    .hero .phrase{ font-size:24px; font-weight:bold; font-style:italic; margin: 5px 0 20px; color: #fff; white-space: nowrap; text-shadow: 1px 1px 8px rgba(0,0,0,0.4); } 
 
     .hero-countdown{ display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
     .hero-count-item{ width: 70px; padding: 10px; border-radius: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); }
@@ -57,9 +56,7 @@
     .card{ background:rgba(255,255,255,.9); border-radius:var(--radius); padding:52px 32px; box-shadow:var(--shadow); text-align:center; }
     .card.beige{background:var(--bg-soft)}
     .eyebrow{ color:var(--gold); text-transform:uppercase; letter-spacing:2px; font-size:12px; margin-bottom:12px; display:inline-block; }
-    h2{ font-size:32px; margin-bottom:18px; color:#4a3b31; line-height: 1.1; font-weight: 500; } /* Títulos más pequeños */
-    .fade-up{ opacity:0; transform:translateY(24px); transition:opacity .8s ease, transform .8s ease; }
-    .fade-up.visible{ opacity:1; transform:translateY(0); }
+    h2{ font-size:28px; margin-bottom:18px; color:#4a3b31; line-height: 1.1; font-weight: 500; } 
 
     /* GRIDS */
     .timeline, .how-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; text-align: left; }
@@ -78,10 +75,10 @@
     .moments-btn{ position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; border:none; background: rgba(255,255,255,0.7); cursor:pointer; z-index: 5; font-size: 20px; }
     .moments-btn.prev{ left: 15px; } .moments-btn.next{ right: 15px; }
 
-    /* RSVP ESTILO BOTÓN TRANSPARENTE */
+    /* RSVP TOGGLE */
     .rsvp-box { max-width: 600px; margin: 0 auto; text-align: center; }
     .btn-toggle-rsvp { 
-      background: rgba(182, 148, 114, 0.15); /* Transparencia */
+      background: rgba(182, 148, 114, 0.15); 
       color: var(--gold-dark); 
       border: 1px solid var(--gold); 
       padding: 16px 40px; 
@@ -90,18 +87,20 @@
       font-weight: bold; 
       cursor: pointer; 
       transition: 0.3s; 
-      white-space: nowrap; /* Una sola línea */
-      margin-bottom: 20px;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
     .btn-toggle-rsvp:hover { background: rgba(182, 148, 114, 0.25); }
     
     #form-container { 
       max-height: 0; 
       overflow: hidden; 
-      transition: max-height 0.8s ease-out; 
+      transition: max-height 0.8s ease-in-out; 
       text-align: left; 
     }
-    #form-container.show { max-height: 1200px; } /* Desplegar */
+    #form-container.show { max-height: 1200px; margin-top: 30px; }
 
     .rsvp-form label { display: block; font-size: 13px; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 1px; margin: 12px 0 5px 5px; font-weight: bold; }
     .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); font-family: inherit; font-size: 16px; outline: none; background: #fff; }
@@ -116,6 +115,7 @@
 
     /* CIERRE */
     .footer-names { font-size: 32px; color: var(--gold-dark); margin-top: 10px; font-style: italic; }
+    .copyright { margin-top: 25px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 15px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
 
     @media (max-width: 900px){ .timeline, .how-grid, .stay-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 45px; } .moments-slide { max-height: 400px; } }
   </style>
@@ -233,7 +233,9 @@
       <span class="eyebrow">Confirmación</span>
       <h2>Confirmar asistencia</h2>
       <div class="rsvp-box">
-        <button class="btn-toggle-rsvp" id="btnShowForm">Confirmar Asistencia</button>
+        <button class="btn-toggle-rsvp" id="btnToggleForm">
+          Confirmar Asistencia <span id="toggleIcon">+</span>
+        </button>
         
         <div id="form-container">
           <form id="rsvpForm" class="rsvp-form">
@@ -265,16 +267,23 @@
       <p style="font-style: italic; font-size: 18px;">Gracias por ser parte de nuestra historia.</p>
       <p class="footer-names">Con Amor, Alfred & Joha</p>
       <p style="margin-top:10px; color:var(--muted); font-size:14px;">Santa Marta, Colombia · 2026</p>
+      <div class="copyright">
+        © 2026 Diseñado por [Tu Nombre] | Todos los derechos reservados
+      </div>
     </div>
   </section>
 
   <audio id="weddingSong" loop><source src="Frente-al-mar.mp3" type="audio/mpeg"></audio>
 
   <script>
-    // MOSTRAR FORMULARIO
-    document.getElementById("btnShowForm").addEventListener("click", function() {
-      document.getElementById("form-container").classList.toggle("show");
-      this.style.display = "none"; // Desaparecer botón tras clic
+    // LÓGICA DEL BOTÓN TOGGLE (+/-)
+    const btnToggle = document.getElementById("btnToggleForm");
+    const container = document.getElementById("form-container");
+    const icon = document.getElementById("toggleIcon");
+
+    btnToggle.addEventListener("click", () => {
+      const isShowing = container.classList.toggle("show");
+      icon.innerText = isShowing ? "−" : "+";
     });
 
     const overlay = document.getElementById("intro-overlay");
@@ -319,13 +328,13 @@
 
     let pos = 0;
     const track = document.getElementById("momentsTrack");
-    function moverManual(n) { pos = (pos + n + 8) % 8; track.style.transform = `translateX(-${pos * 100}%)`; }
+    function moverManual(n) { pos = (pos + n + 8) % 8; track.style.transform = `translateX(-${pos * 100}%)`; resetAuto(); }
     let autoSlide = setInterval(() => { pos = (pos + 1) % 8; track.style.transform = `translateX(-${pos * 100}%)`; }, 5000);
+    function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => { pos = (pos + 1) % 8; track.style.transform = `translateX(-${pos * 100}%)`; }, 5000); }
 
     const observer = new IntersectionObserver(ents => ents.forEach(e => e.isIntersecting && e.target.classList.add("visible")), { threshold: 0.1 });
     document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
 
-    // RSVP
     const scriptURL = "https://api.sheetbest.com/sheets/b4cf6ad2-4545-40d0-a1e7-bf5b1282b342";
     const rsvpForm = document.getElementById("rsvpForm");
     rsvpForm.addEventListener("submit", async (e) => {
