@@ -34,7 +34,7 @@
     #celebration-burst.show span { animation: burstAni 1s ease-out forwards; }
     @keyframes burstAni { 0%{opacity:1;transform:translate(0,0)} 100%{opacity:0;transform:translate(var(--tx), var(--ty))} }
 
-    /* --- BOTÓN AUDIO (UBICACIÓN INDEPENDIENTE) --- */
+    /* --- BOTÓN AUDIO (INDEPENDIENTE) --- */
     .audio-btn { background: var(--gold); color: white; display: flex; align-items: center; justify-content: center; z-index: 100000; cursor: pointer; border: 2px solid white; transition: all 0.6s ease; box-shadow: var(--shadow); }
     .intro-audio-btn { position: fixed; left: 50%; bottom: 80px; transform: translateX(-50%); width: 80px; height: 80px; font-size: 28px; border-radius: 50%; animation: pulse 2s infinite; }
     .fixed-audio-btn { position: fixed !important; bottom: 25px !important; right: 25px !important; left: auto !important; transform: none !important; width: 55px !important; height: 55px !important; font-size: 18px !important; border-radius: 50% !important; opacity: 0.8 !important; }
@@ -56,7 +56,7 @@
     .scroll-guide p { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; font-weight: bold; }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-10px);} 60% {transform: translateX(-50%) translateY(-5px);} }
 
-    /* SECTIONS */
+    /* SECTIONS GENERAL */
     .section{ max-width:var(--max); margin:74px auto; padding:0 20px; }
     .card{ background:rgba(255,255,255,.9); border-radius:var(--radius); padding:52px 32px; box-shadow:var(--shadow); text-align:center; }
     .card.beige{background:var(--bg-soft)}
@@ -74,28 +74,91 @@
     .timeline-card, .how-card, .stay-card { background:#fffaf5; border:1px solid var(--line); border-radius:20px; padding:24px; }
     .stay-media img { width:100%; height:220px; object-fit:cover; border-radius:12px; margin-bottom: 15px; }
 
-    /* CARRUSEL */
+    /* CARRUSEL MOMENTOS */
     .moments-carousel{ position: relative; max-width: 100%; margin: 30px auto 0; overflow:hidden; border-radius: 24px; background: #000; }
     .moments-track{ display: flex; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); align-items: center; cursor: grab; }
     .moments-slide{ min-width: 100%; max-height: 600px; object-fit: contain; pointer-events: none; }
     .moments-btn{ position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; border-radius: 50%; border:none; background: rgba(255,255,255,0.7); cursor:pointer; z-index: 5; font-size: 20px; }
     .moments-btn.prev{ left: 15px; } .moments-btn.next{ right: 15px; }
 
-    /* RSVP */
-    .rsvp-box { max-width: 600px; margin: 0 auto; text-align: center; }
-    .btn-toggle-rsvp { background: rgba(182, 148, 114, 0.15); color: var(--gold-dark); border: 1px solid var(--gold); padding: 16px 40px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+    /* --- NUEVOS ESTILOS RSVP ELEGANTE --- */
+    #rsvp .card { 
+      max-width: 500px; 
+      margin: 0 auto; 
+      padding: 35px 25px; 
+      transition: all 0.5s ease;
+    }
+    .rsvp-box { width: 100%; text-align: center; }
+    .btn-toggle-rsvp { 
+      background: var(--gold); 
+      color: white; 
+      border: none; 
+      padding: 16px 35px; 
+      border-radius: 50px; 
+      font-size: 17px; 
+      font-weight: bold; 
+      cursor: pointer; 
+      transition: 0.3s; 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 12px; 
+      box-shadow: 0 4px 15px rgba(182, 148, 114, 0.3);
+    }
     #form-container { max-height: 0; overflow: hidden; transition: max-height 0.8s ease-in-out; text-align: left; }
     #form-container.show { max-height: 1200px; margin-top: 30px; }
-    .btn-submit { background: var(--gold); color: white; border: none; padding: 18px; border-radius: 50px; width: 100%; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 25px; }
 
-    /* FADE UP */
+    .rsvp-form { display: flex; flex-direction: column; gap: 20px; padding-top: 10px; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-row { display: flex; gap: 15px; }
+    .form-row .form-group { flex: 1; }
+    
+    .rsvp-form label { 
+      font-size: 11px; 
+      font-weight: bold; 
+      letter-spacing: 1.5px; 
+      color: var(--gold-dark); 
+      text-transform: uppercase; 
+      margin-bottom: 5px; 
+      padding-left: 2px;
+    }
+    .rsvp-form input, .rsvp-form select, .rsvp-form textarea { 
+      width: 100%; 
+      padding: 10px 5px; 
+      border: none; 
+      border-bottom: 1px solid var(--line); 
+      background: transparent; 
+      font-family: inherit; 
+      font-size: 16px; 
+      outline: none; 
+      color: var(--text);
+      border-radius: 0;
+    }
+    .rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus { 
+      border-bottom: 1px solid var(--gold); 
+    }
+    .btn-submit { 
+      background: var(--text); 
+      color: white; 
+      border: none; 
+      padding: 18px; 
+      border-radius: 50px; 
+      width: 100%; 
+      font-size: 16px; 
+      font-weight: bold; 
+      cursor: pointer; 
+      transition: 0.3s; 
+      margin-top: 15px; 
+      letter-spacing: 1px;
+    }
+
+    /* FADE ANIMATION */
     .fade-up { opacity: 0; transform: translateY(20px); transition: 0.8s ease-out; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     .footer-names { font-size: 24px; line-height: 1.1; color: var(--gold-dark); margin-top: 10px; font-style: italic; text-align: center; }
     .copyright { margin-top: 25px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 15px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
 
-    @media (max-width: 900px){ .timeline, .how-grid, .stay-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 45px; } .moments-slide { max-height: 400px; } }
+    @media (max-width: 900px){ .timeline, .how-grid, .stay-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 45px; } .moments-slide { max-height: 400px; } .form-row { flex-direction: column; gap: 20px; } }
   </style>
 </head>
 <body>
@@ -166,13 +229,13 @@
           <div class="stay-media"><img src="Delventto.jpg" alt="Delventto"></div>
           <h3>Delventto</h3>
           <p>Apartamentos muy cerca del evento.</p>
-          <a href="https://es-l.airbnb.com/rooms/1555358437242662400" target="_blank" class="btn-submit" style="display:block; text-align:center; text-decoration:none;">Airbnb</a>
+          <a href="https://es-l.airbnb.com/rooms/1555358437242662400" target="_blank" class="btn-submit" style="display:block; text-align:center; text-decoration:none; background:var(--gold); color:white; padding:15px; border-radius:50px; font-size: 14px;">Airbnb</a>
         </div>
         <div class="stay-card">
           <div class="stay-media"><img src="Samaria.jpg" alt="Samaria"></div>
           <h3>Samaria</h3>
           <p>Comodidad frente al mar.</p>
-          <a href="https://www.booking.com/Share-eUOU7w" target="_blank" class="btn-submit" style="display:block; text-align:center; text-decoration:none;">Booking</a>
+          <a href="https://www.booking.com/Share-eUOU7w" target="_blank" class="btn-submit" style="display:block; text-align:center; text-decoration:none; background:var(--gold); color:white; padding:15px; border-radius:50px; font-size: 14px;">Booking</a>
         </div>
       </div>
     </div>
@@ -206,28 +269,47 @@
 
   <section class="section fade-up" id="rsvp">
     <div class="card">
-      <span class="eyebrow">Confirmación</span>
       <div class="rsvp-box">
         <button class="btn-toggle-rsvp" id="btnToggleForm">
           Confirmar Asistencia <span id="toggleIcon">+</span>
         </button>
+        
         <div id="form-container">
           <form id="rsvpForm" class="rsvp-form">
-            <label>Nombre completo</label>
-            <input type="text" name="Nombre" placeholder="Tu nombre" required>
-            <label>¿Asistirás?</label>
-            <select name="Asistencia" required>
-              <option value="Si">Sí, ¡con mucho gusto!</option>
-              <option value="No">No podré asistir</option>
-            </select>
-            <label>Número de invitados</label>
-            <input type="number" name="NumeroInvitados" min="1" max="6" value="1">
-            <label>Nombre del Hospedaje</label>
-            <input type="text" name="Nombre_Hospedaje" placeholder="¿Dónde te quedarás?">
-            <label>¿Viajas en Carro?</label>
-            <select name="Viajas_en_Carro"><option value="Si">Sí</option><option value="No">No</option></select>
-            <label>Observaciones</label>
-            <textarea name="Observaciones" rows="3" placeholder="Mensajes especiales o restricciones..."></textarea>
+            <div class="form-group">
+              <label>Nombre completo</label>
+              <input type="text" name="Nombre" placeholder="Tu nombre" required>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>¿Asistirás?</label>
+                <select name="Asistencia" required>
+                  <option value="Si">Sí, ¡con mucho gusto!</option>
+                  <option value="No">No podré asistir</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Nro. Invitados</label>
+                <input type="number" name="NumeroInvitados" min="1" max="6" value="1">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>¿Dónde te quedarás?</label>
+              <input type="text" name="Nombre_Hospedaje" placeholder="Nombre del hotel o Airbnb">
+            </div>
+
+            <div class="form-group">
+              <label>¿Viajas en Carro?</label>
+              <select name="Viajas_en_Carro"><option value="Si">Sí</option><option value="No">No</option></select>
+            </div>
+
+            <div class="form-group">
+              <label>Observaciones</label>
+              <textarea name="Observaciones" rows="3" placeholder="Alergias o mensajes especiales..."></textarea>
+            </div>
+
             <button type="submit" id="submitBtn" class="btn-submit">Enviar Confirmación</button>
           </form>
         </div>
@@ -248,7 +330,7 @@
   <audio id="weddingSong" loop><source src="Frente-al-mar.mp3" type="audio/mpeg"></audio>
 
   <script>
-    // LÓGICA RSVP
+    // --- LÓGICA RSVP ---
     const btnToggle = document.getElementById("btnToggleForm");
     const container = document.getElementById("form-container");
     const icon = document.getElementById("toggleIcon");
@@ -259,7 +341,7 @@
       });
     }
 
-    // LÓGICA INTRO Y AUDIO
+    // --- LÓGICA AUDIO Y CORTINA ---
     const overlay = document.getElementById("intro-overlay");
     const countNumber = document.getElementById("count-number");
     const musicBtn = document.getElementById("musicButton");
@@ -290,56 +372,29 @@
       }
     });
 
-    // LÓGICA CARRUSEL CON SOPORTE TÁCTIL (SWIPE)
+    // --- CARRUSEL TÁCTIL ---
     let pos = 0;
     const track = document.getElementById("momentsTrack");
     const totalSlides = 8;
 
-    function updateCarousel() {
-      if(track) track.style.transform = `translateX(-${pos * 100}%)`;
-    }
+    function updateCarousel() { if(track) track.style.transform = `translateX(-${pos * 100}%)`; }
+    function moverManual(n) { pos = (pos + n + totalSlides) % totalSlides; updateCarousel(); resetAuto(); }
+    let autoSlide = setInterval(() => { pos = (pos + 1) % totalSlides; updateCarousel(); }, 5000);
+    function resetAuto() { clearInterval(autoSlide); autoSlide = setInterval(() => { pos = (pos + 1) % totalSlides; updateCarousel(); }, 5000); }
 
-    function moverManual(n) {
-      pos = (pos + n + totalSlides) % totalSlides;
-      updateCarousel();
-      resetAuto();
-    }
-
-    let autoSlide = setInterval(() => {
-      pos = (pos + 1) % totalSlides;
-      updateCarousel();
-    }, 5000);
-
-    function resetAuto() {
-      clearInterval(autoSlide);
-      autoSlide = setInterval(() => {
-        pos = (pos + 1) % totalSlides;
-        updateCarousel();
-      }, 5000);
-    }
-
-    // Eventos Touch para celulares
     let touchStartX = 0;
     let touchEndX = 0;
-
     if(track) {
-      track.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, {passive: true});
-
-      track.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        handleGesture();
-      }, {passive: true});
+      track.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+      track.addEventListener('touchend', e => { touchEndX = e.changedTouches[0].screenX; handleGesture(); }, {passive: true});
     }
-
     function handleGesture() {
       const swipeThreshold = 50;
-      if (touchStartX - touchEndX > swipeThreshold) { moverManual(1); } // Swipe Izquierda
-      if (touchEndX - touchStartX > swipeThreshold) { moverManual(-1); } // Swipe Derecha
+      if (touchStartX - touchEndX > swipeThreshold) moverManual(1);
+      if (touchEndX - touchStartX > swipeThreshold) moverManual(-1);
     }
 
-    // COUNTDOWN
+    // --- COUNTDOWN ---
     const weddingDate = new Date("2026-11-14T15:00:00").getTime();
     setInterval(() => {
       const now = new Date().getTime();
@@ -352,7 +407,7 @@
       }
     }, 1000);
 
-    // OBSERVER FADE UP
+    // --- OBSERVER ---
     const observer = new IntersectionObserver(ents => ents.forEach(e => e.isIntersecting && e.target.classList.add("visible")), { threshold: 0.1 });
     document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
   </script>
