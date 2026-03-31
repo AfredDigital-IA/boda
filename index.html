@@ -152,11 +152,17 @@
     .footer-names { font-size: 24px; color: var(--gold-dark); margin-top: 10px; font-style: italic; text-align: center; }
     .copyright { margin-top: 25px; font-size: 11px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 15px; opacity: 0.7; text-transform: none; letter-spacing: 1px; text-align: center; font-family: "Arial", sans-serif; text-transform: capitalize;}
 
-    @media (max-width: 900px){ 
-      .two-column-grid, .stay-grid { grid-template-columns: 1fr; } 
-      .hero h1 { font-size: 45px; } 
-      .moments-slide { max-height: 400px; } 
-    }
+    @media (max-width: 900px) {
+  /* ... otros estilos que ya tengas ... */
+
+  .hero h1 { 
+    font-size: 38px; /* Bajamos un poco de 45px a 38px para que quepa mejor */
+    white-space: nowrap; /* ESTA ES LA CLAVE: Prohíbe el salto de línea */
+    letter-spacing: -1px; /* Cierra un poco las letras para ganar espacio */
+  } 
+
+  /* ... otros estilos ... */
+}
   </style>
 </head>
 <body>
