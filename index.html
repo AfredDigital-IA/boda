@@ -192,6 +192,22 @@
     </div>
   </div>
 
+  <script>
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      let invitado = urlParams.get('para'); 
+      if (invitado) {
+        invitado = invitado.replace(/_/g, ' ');
+        // Escribimos el nombre directamente antes de que la página siga cargando
+        document.getElementById("guest-greeting").innerText = "Especialmente para:";
+        document.getElementById("guest-greeting").style.opacity = "1";
+        document.getElementById("guest-name").innerText = invitado;
+      } else {
+        document.getElementById("guest-greeting").style.display = "none";
+      }
+    })();
+  </script>
+
   <section class="hero">
     <div class="hero-box">
       <div class="overline">Nos casamos</div>
@@ -374,21 +390,6 @@
   <audio id="weddingSong" loop><source src="Frente-al-mar.mp3" type="audio/mpeg"></audio>
 
   <script>
-    // --- LÓGICA DE PERSONALIZACIÓN ---
-    window.addEventListener('load', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      let invitado = urlParams.get('para'); 
-
-      if (invitado) {
-        invitado = invitado.replace(/_/g, ' ');
-        document.getElementById("guest-greeting").innerText = "Especialmente para:";
-        document.getElementById("guest-greeting").style.opacity = "1";
-        document.getElementById("guest-name").innerText = invitado;
-      } else {
-        document.getElementById("guest-greeting").style.display = "none";
-      }
-    });
-
     // --- LÓGICA BOTONES (Música + WhatsApp) ---
     const musicBtn = document.getElementById("musicButton");
     const whatsappBtn = document.getElementById("whatsappBtn");
