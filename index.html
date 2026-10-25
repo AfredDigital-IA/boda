@@ -217,9 +217,8 @@
   display: block;
   width: 100%;
   max-width: 620px;
-  height: 400px;
-  object-fit: cover;
-  object-position: center 55%;
+  height: auto;
+  object-fit: contain;
   border-radius: 18px;
   margin: 0 auto 25px;
 }
@@ -313,9 +312,10 @@
     font-size: 14px;
   }
 
-  #ceremonia .ceremonia-foto {
-    height: 300px;
-  }
+#ceremonia .ceremonia-foto {
+  width: 100%;
+  height: auto;
+}
 
   #ceremonia .ceremonia-card > h3 {
     font-size: 22px;
@@ -339,7 +339,34 @@
   }
 }
 
+/* BOTÓN UBICACIÓN CAPILLA */
 
+#ceremonia .ceremonia-mapa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 25px;
+  margin: 12px auto 20px;
+  background: #b69472;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#ceremonia .ceremonia-mapa:hover {
+  background: #a68463;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  #ceremonia .ceremonia-mapa {
+    font-size: 13px;
+    padding: 12px 20px;
+  }
+}
     
   </style>
 </head>
@@ -450,6 +477,13 @@
     <h3>Capilla Los Alcatraces</h3>
     <p class="ceremonia-hora">12:00 m.</p>
 
+<a href="https://maps.app.goo.gl/iM6wtu4uMWsBD68P9"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="ceremonia-mapa">
+  📍 Cómo llegar a la capilla
+</a>
+    
     <p class="ceremonia-aviso">
       Te esperamos a las 11:30 a. m.,
       30 minutos antes de la ceremonia.
