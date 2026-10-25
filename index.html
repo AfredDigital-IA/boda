@@ -384,6 +384,42 @@
   }
 }
     
+
+    /* AJUSTES INTRO RESPONSIVE Y BOTÓN DE REPRODUCCIÓN */
+    #intro-overlay { overflow-y: auto; padding: 24px 18px; }
+    .intro-content { padding: 18px 0 110px; }
+    #intro-message { max-width: 760px; margin: 22px auto 0; line-height: 1.5; }
+    #intro-message .intro-years { font-size: 23px; margin-bottom: 12px; }
+    #intro-message .intro-title { color: #f5e7d7; font-size: 30px; line-height: 1.25; margin: 0 0 18px; }
+    #intro-message .intro-description { font-size: 20px; line-height: 1.55; margin: 0 auto 14px; }
+    #intro-message .intro-final { font-size: 21px; margin: 0; }
+    .audio-btn { appearance: none; -webkit-appearance: none; padding: 0; font-family: inherit; color: #3d322c; }
+    .play-symbol { display: block; width: 0; height: 0; border-top: 11px solid transparent; border-bottom: 11px solid transparent; border-left: 17px solid #3d322c; margin-left: 5px; }
+    .pause-symbol { display: block; width: 17px; height: 23px; border-left: 6px solid #3d322c; border-right: 6px solid #3d322c; }
+    @media (max-width: 600px) {
+      #intro-overlay { padding: 18px 18px 24px; align-items: center; }
+      .intro-content { padding: 12px 0 92px; max-width: 100%; }
+      #count-number { font-size: clamp(68px, 20vw, 95px); line-height: 1; }
+      #intro-message { margin-top: 18px; font-size: 16px; line-height: 1.45; }
+      #intro-message .intro-years { font-size: 18px; margin-bottom: 10px; }
+      #intro-message .intro-title { font-size: 23px; margin-bottom: 14px; line-height: 1.25; }
+      #intro-message .intro-description { font-size: 16px; line-height: 1.5; margin-bottom: 12px; }
+      #intro-message .intro-final { font-size: 17px; line-height: 1.35; }
+      .intro-label { font-size: 17px; letter-spacing: 2px; }
+      #guest-greeting { font-size: 14px; }
+      #guest-name { font-size: 23px; min-height: 0; margin-bottom: 14px; }
+      .intro-audio-btn { width: 70px; height: 70px; bottom: max(22px, env(safe-area-inset-bottom)); }
+      .fixed-audio-btn { width: 55px; height: 55px; }
+      .hero .phrase { white-space: normal; }
+    }
+    @media (max-width: 380px) {
+      #intro-message .intro-description { font-size: 14px; }
+      #intro-message .intro-title { font-size: 21px; }
+      #intro-message .intro-years { font-size: 16px; }
+      #intro-message .intro-final { font-size: 15px; }
+      #count-number { font-size: 65px; }
+    }
+
   </style>
 </head>
 <body>
@@ -395,7 +431,7 @@
     <svg width="25" height="25" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.544.917 3.31 1.4 5.1 1.4 5.454 0 9.895-4.442 9.898-9.896.002-2.644-1.03-5.13-2.908-7.01-1.88-1.88-4.363-2.91-7.002-2.912-5.455 0-9.897 4.441-9.899 9.897-.001 1.916.498 3.79 1.446 5.43l-1.01 3.689 3.775-.989z"/></svg>
   </a>
 
-  <div id="musicButton" class="audio-btn intro-audio-btn hidden"><span id="audioIcon">▶</span></div>
+  <button type="button" id="musicButton" class="audio-btn intro-audio-btn hidden" aria-label="Reproducir música"><span id="audioIcon" class="play-symbol" aria-hidden="true"></span></button>
 
   <div id="intro-overlay">
     <div class="intro-content">
@@ -795,11 +831,13 @@
         song.play();
         overlay.classList.add("hide");
         musicBtn.className = "audio-btn fixed-audio-btn";
-        audioIcon.innerText = "❚❚";
+        audioIcon.className = "pause-symbol";
+        musicBtn.setAttribute("aria-label", "Pausar música");
         whatsappBtn.classList.add("visible");
       } else {
         song.pause();
-        audioIcon.innerText = "▶";
+        audioIcon.className = "play-symbol";
+        musicBtn.setAttribute("aria-label", "Reproducir música");
       }
     });
 
